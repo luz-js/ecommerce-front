@@ -1,6 +1,6 @@
 import styled, {css} from "styled-components";
-import { primary } from "@/lib/colors";
-
+import { primary, amarrillo } from "@/lib/colors";
+// this is LUZ MARIEL PROYECT
 export const ButtonStyle = css`
   border:0;
   padding: 5px 15px;
@@ -42,10 +42,20 @@ export const ButtonStyle = css`
     border: 1px solid ${primary};
     color:#fff;
   `}
+  ${props => props.amarrillo && !props.outline && css`
+    background-color: ${amarrillo};
+    border: 1px solid ${amarrillo};
+    color:#fff;
+  `}
   ${props => props.primary && props.outline && css`
     background-color: transparent;
     border: 1px solid ${primary};
     color:${primary};
+  `}
+  ${props => props.amarrillo && props.outline && css`
+    background-color: transparent;
+    border: 1px solid ${amarrillo};
+    color:${amarrillo};
   `}
   ${props => props.size === 'l' && css`
     font-size:1.2rem;

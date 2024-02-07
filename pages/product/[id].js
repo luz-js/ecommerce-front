@@ -10,13 +10,14 @@ import Button from "@/components/Button";
 import CartIcon from "@/components/icons/CartIcon";
 import {useContext} from "react";
 import {CartContext} from "@/components/CartContext";
-import { primary } from "@/lib/colors";
+import { primary,amarrillo } from "@/lib/colors";
+import ProductReviews from "@/components/ProductReview";
 
 const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   border-radius: 10px;
-  background-color: #f6bd60;
+  background-color: #001427;
   box-shadow: 1px 2px 20px 0px rgba(2, 30, 29, 0.3);
   @media screen and (min-width: 768px) {
     grid-template-columns: .8fr 1.2fr;
@@ -39,8 +40,9 @@ flex-direction: column;
 //align-items: center;
 justify-content: center;
 margin-left: 40px;
-color: ${primary};
+color: #f1f1f1;
 font-size: 1.3rem;
+font-weight: 100;
 `;
 
 export default function ProductPage({product}) {
@@ -61,13 +63,14 @@ export default function ProductPage({product}) {
                 <Price>${product.price}</Price>
               </div>
               <div>
-                <Button primary onClick={() => addProduct(product._id)}>
+                <Button onClick={() => addProduct(product._id)}>
                   <CartIcon />Add to cart
                 </Button>
               </div>
             </PriceRow>
           </Div>
         </ColWrapper>
+        <ProductReviews product={product} />
       </Center>
     </>
   );

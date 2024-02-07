@@ -1,30 +1,45 @@
 import styled from "styled-components";
-import ProductBox from "./ProductBox";
-import Center from "./Center";
-
-const ProductsGrid = styled.div`
-display:grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
-gap: 70px;
-padding-top: 30px;
-`
+import Center from "@/components/Center";
+import ProductsGrid from "@/components/ProductsGrid";
+import { primary } from "@/lib/colors";
 
 const Title = styled.h2`
   font-size: 2rem;
-  margin:30px 0 20px;
-  font-weight: normal;
+  margin:20px 0px 0px;
+  text-align: center;
+`;
+const Text = styled.p`
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 100;
+  margin-bottom: 50px;
+`;
+const Linea = styled.hr`
+height: 1px;
+background-color: ${primary};
+`;
+const LineaDos = styled.hr`
+margin-bottom: 50px;
+height: 1px;
+background-color: ${primary};
+`;
+const Caja = styled.div`
+background-color: #001427;
+padding-top: 2px;
+padding-bottom: 2px;
+color: white;
+margin-bottom: 40px;
+border-radius: 5px;
 `;
 
-export default function NewProducts({products}) {
+
+export default function NewProducts({products,wishedProducts}) {
   return (
     <Center>
+      <Linea />
         <Title>Nuevos Productos</Title>
-      <ProductsGrid>
-        {products?.length > 0 && products.map(product => (
-            <ProductBox key={product.id} {...product}/>
-        ))}
-      </ProductsGrid>  
+        <Text>Nuestros nuevos lanzamientos disponibles</Text>
+      <ProductsGrid products={products} wishedProducts={wishedProducts} />
     </Center>
-    
   );
 }
