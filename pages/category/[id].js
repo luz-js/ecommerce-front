@@ -90,7 +90,7 @@ export default function CategoryPage({
                 <select
                   onChange={ev => handleFilterChange(prop.name, ev.target.value)}
                   value={filtersValues.find(f => f.name === prop.name).value}>
-                  <option value="all">All</option>
+                  <option value="all">Todas</option>
                   {prop.values.map(val => (
                     <option key={val} value={val}>{val}</option>
                   ))}
@@ -98,17 +98,17 @@ export default function CategoryPage({
               </Filter>
             ))}
             <Filter>
-              <span>Sort:</span>
+              <span>Ordenar:</span>
               <select
                 value={sort}
                 onChange={ev => {
                   setSort(ev.target.value);
                   setFiltersChanged(true);
                 }}>
-                <option value="price-asc">price, lowest first</option>
-                <option value="price-desc">price, highest first</option>
-                <option value="_id-desc">newest first</option>
-                <option value="_id-asc">oldest first</option>
+                <option value="price-asc">Precios mas bajos</option>
+                <option value="price-desc">Precios mas altos</option>
+                <option value="_id-desc">Nuevos primeros</option>
+                <option value="_id-asc">Viejos primeros</option>
               </select>
             </Filter>
           </FiltersWrapper>
@@ -122,7 +122,7 @@ export default function CategoryPage({
               <ProductsGrid products={products} />
             )}
             {products.length === 0 && (
-              <div>Sorry, no products found</div>
+              <div>Lo siento, no existen productos con estas categorías</div>
             )}
           </div>
         )}

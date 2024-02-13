@@ -69,12 +69,12 @@ export default function AccountPage() {
       setWishlistLoaded(false);
       setOrderLoaded(false);
       axios.get('/api/address').then(response => {
-        setName(response.data.name);
-        setEmail(response.data.email);
-        setCity(response.data.city);
-        setPostalCode(response.data.postalCode);
-        setStreetAddress(response.data.streetAddress);
-        setCountry(response.data.country);
+        setName(response.data?.name);
+        setEmail(response.data?.email);
+        setCity(response.data?.city);
+        setPostalCode(response.data?.postalCode);
+        setStreetAddress(response.data?.streetAddress);
+        setCountry(response.data?.country);
         setAddressLoaded(true);
       });
       axios.get('/api/wishlist').then(response => {
@@ -153,7 +153,7 @@ export default function AccountPage() {
             <div>
               <RevealWrapper delay={100}>
                 <WhiteBox>
-                  <h2>{session ? 'Account details' : 'Login'}</h2>
+                  <h2>{session ? 'Detalles de la cuenta' : 'Login'}</h2>
                   {!addressLoaded && (
                     <Spinner fullWidth={true} />
                   )}

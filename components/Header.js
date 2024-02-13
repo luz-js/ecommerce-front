@@ -88,9 +88,9 @@ export default function Header() {
             <Logo href={'/'}>DuoComp</Logo>
             <StyledNav mobileNavActive={mobileNavActive}>
               <NavLink href={'/'}>Home</NavLink>
-              <NavLink href={'/products'}>All products</NavLink>
-              <NavLink href={'/categories'}>Categories</NavLink>
-              <NavLink href={'/account'}>Account</NavLink>
+              <NavLink href={'/products'}>Todos los productos</NavLink>
+              <NavLink href={'/categories'}>Categorías</NavLink>
+              <NavLink href={'/account'}>Cuenta</NavLink>
               <NavLink href={'/cart'}>Cart({cartProducts.length})</NavLink>
               <SideIcons><Link href={'/search'}><SearchIcon /></Link></SideIcons>
             </StyledNav>
