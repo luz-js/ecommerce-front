@@ -12,6 +12,8 @@ import Spinner from "@/components/Spinner";
 import ProductBox from "@/components/ProductBox";
 import Tabs from "@/components/Tabs";
 import SingleOrder from "@/components/SingleOrder";
+import Swal from 'sweetalert2';
+import { GoogleButton, FacebookButton } from "@/components/loginButtons";
 
 const ColsWrapper = styled.div`
   display:grid;
@@ -59,7 +61,27 @@ export default function AccountPage() {
     }
     function saveAddress() {
       const data = {name,email,city,streetAddress,postalCode,country};
-      axios.put('/api/address', data);
+      axios.put('/api/address', data)
+          .then(response => {
+            // La petición PUT se envió correctamente
+            Swal.fire({
+                icon: 'success',
+                title: '¡Dirección guardada!',
+                text: 'La dirección se guardó exitosamente.',
+            });
+            // Aquí puedes realizar otras acciones si es necesario
+        })
+        .catch(error => {
+            // Manejar cualquier error que pueda ocurrir durante la petición
+            console.error('Error al guardar la dirección:', error);
+            // Mostrar una alerta de error utilizando SweetAlert
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Ocurrió un error al guardar la dirección. Por favor, intenta de nuevo más tarde.',
+            });
+        });
+      
     }
     useEffect(() => {
       if (!session) {
@@ -202,7 +224,10 @@ export default function AccountPage() {
                     <Button primary onClick={logout}>Logout</Button>
                   )}
                   {!session && (
-                    <Button primary onClick={login}>Ingresar con Google</Button>
+                    <div>
+                      <GoogleButton onClick={(e) => signIn('google')}>Ingresar con Google</GoogleButton>
+                      <FacebookButton onClick={(e) => signIn('facebook')}>Ingresar con Facebook</FacebookButton>
+                    </div>
                   )}
                 </WhiteBox>
               </RevealWrapper>

@@ -1,7 +1,8 @@
 import clientPromise from '@/lib/mongodb'
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
-import NextAuth from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import FacebookProvider from "next-auth/providers/facebook";
 
 export const authOptions = {
   secret: process.env.SECRET,
@@ -9,6 +10,10 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_FRONT_ID,
       clientSecret: process.env.GOOGLE_FRONT_SECRET
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET
     }),
   ],
   adapter: MongoDBAdapter(clientPromise),
