@@ -55,7 +55,7 @@ export default function SearchPage() {
             placeholder="Buscar productos..." />
         </InputWrapper>
         {!isLoading && phrase !== '' && products.length === 0 && (
-          <h2>Producto no disponible"{phrase}"</h2>
+          <h2>Producto no disponible &quot;{phrase}&quot;</h2>
         )}
         {isLoading && (
           <Spinner fullWidth={true} />
