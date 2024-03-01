@@ -9,6 +9,9 @@ import Table from "@/components/Table";
 import Input from "@/components/Input";
 import {RevealWrapper} from "next-reveal";
 import {useSession} from "next-auth/react";
+import { GoogleButton } from "@/components/loginButtons";
+import { FacebookButton } from "@/components/loginButtons";
+import { signIn } from "next-auth/react";
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -83,6 +86,10 @@ const QuantityLabel = styled.span`
 const CityHolder = styled.div`
   display:flex;
   gap: 5px;
+`;
+
+const Img = styled.img`
+  width: 100%;
 `;
 
 export default function CartPage() {
@@ -162,6 +169,7 @@ export default function CartPage() {
             <Box>
               <h1>Gracias por tu órden!</h1>
               <p>Te enviaremos un Email cuando el pedido sea enviado.</p>
+              <Img src="https://img.freepik.com/free-vector/order-confirmed-concept-illustration_114360-2101.jpg?t=st=1709294795~exp=1709298395~hmac=54c9b28926456b7252c6260ecb7ac98b51a88502dc86cb12242c98534d44d3aa&w=1480"></Img>
             </Box>
           </ColumnsWrapper>
         </Center>
@@ -228,7 +236,7 @@ export default function CartPage() {
               )}
             </Box>
           </RevealWrapper>
-          {!!cartProducts?.length && (
+          {session && !!cartProducts?.length ?       
             <RevealWrapper delay={100}>
               <Box>
                 <h2>Informació de la órden</h2>
@@ -270,7 +278,20 @@ export default function CartPage() {
                 </Button>
               </Box>
             </RevealWrapper>
-          )}
+          :
+          
+          <RevealWrapper>
+            
+              <Box>
+                <h3>Debe iniciar sesión para poder registrar una órden</h3>
+                <GoogleButton onClick={(e) => signIn('google')}>Ingresar con Google</GoogleButton>
+                <FacebookButton onClick={(e) => signIn('facebook')}>Ingresar con Facebook</FacebookButton>
+              </Box>            
+            
+          </RevealWrapper>
+    
+          }
+   
         </ColumnsWrapper>
       </Center>
     </>

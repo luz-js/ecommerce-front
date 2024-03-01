@@ -109,7 +109,7 @@ export default function Featured({ product }) {
           </Column>
           <Column>
             <RevealWrapper duration={500}>
-              <img src="https://dawid-next-ecommerce.s3.amazonaws.com/1679151719649.png" alt="" />
+            <img className={'main'} src={product.images?.[0]} alt=""/>
             </RevealWrapper>
           </Column>
         </ColumnsWrapper>

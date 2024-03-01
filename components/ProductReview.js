@@ -7,6 +7,8 @@ import Button from "@/components/Button";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Spinner from "@/components/Spinner";
+import { getSession } from 'next-auth/react';
+
 
 const Title = styled.h2`
   font-size:1.2rem;
@@ -58,8 +60,14 @@ export default function ProductReviews({product}) {
   const [stars,setStars] = useState(0);
   const [reviews,setReviews] = useState([]);
   const [reviewsLoading,setReviewsLoading] = useState(false);
-  function submitReview() {
-    const data = {title,description,stars,product:product._id};
+
+  async function submitReview() {
+    const session = await getSession();
+    if (!session) {
+      return
+    }
+   
+    const data = {title,description,stars,product:product._id,user: session.user.id,email: session.user.email,};
     axios.post('/api/reviews', data).then(res => {
       setTitle('');
       setDescription('');
@@ -70,11 +78,12 @@ export default function ProductReviews({product}) {
   useEffect(() => {
     loadReviews();
   }, []);
-  function loadReviews() {
+  async function loadReviews() {
     setReviewsLoading(true);
     axios.get('/api/reviews?product='+product._id).then(res => {
       setReviews(res.data);
       setReviewsLoading(false);
+      console.log(res.data)
     });
   }
   return (
@@ -96,7 +105,7 @@ export default function ProductReviews({product}) {
               onChange={ev => setDescription(ev.target.value)}
               placeholder="Fué bueno? Pros? Contras?" />
             <div>
-              <Button primary onClick={submitReview}>Enviar tu review</Button>
+                <Button primary onClick={submitReview}>Enviar tu review</Button>
             </div>
           </WhiteBox>
         </div>
@@ -117,6 +126,7 @@ export default function ProductReviews({product}) {
                 </ReviewHeader>
                 <h3>{review.title}</h3>
                 <p>{review.description}</p>
+                <p>Usuario: {review.email}</p>
               </ReviewWrapper>
             ))}
           </WhiteBox>

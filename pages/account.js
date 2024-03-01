@@ -36,6 +36,11 @@ const WishedProductsGrid = styled.div`
   gap: 40px;
 `;
 
+const Img = styled.img`
+  width: 50%;
+  margin-top: 40px;
+`;
+
 export default function AccountPage() {
     const {data:session} = useSession();
     const [name,setName] = useState('');
@@ -134,7 +139,11 @@ export default function AccountPage() {
                       {orderLoaded && (
                         <div>
                           {orders.length === 0 && (
-                            <p>Ingresa para ver tus órdenes</p>
+                            <div>
+                              <p>Ingresa para ver tus órdenes</p>
+                              <Img src="https://img.freepik.com/free-vector/sign-concept-illustration_114360-5375.jpg?t=st=1709295218~exp=1709298818~hmac=98e09e871ba8966ff99029c331b77dd6ad3300994cae8b27a4835ea7e90fa66d&w=1480"></Img>
+                            </div>
+                            
                           )}
                           {orders.length > 0 && orders.map(o => (
                             <SingleOrder  key={orders._id} {...o} />
@@ -161,7 +170,10 @@ export default function AccountPage() {
                                 <p>Tu lista de favoritos está vacía</p>
                               )}
                               {!session && (
+                                <div>
                                 <p>Ingresa para ver tu lista de favoritos</p>
+                                <Img src="https://img.freepik.com/free-vector/sign-concept-illustration_114360-5375.jpg?t=st=1709295218~exp=1709298818~hmac=98e09e871ba8966ff99029c331b77dd6ad3300994cae8b27a4835ea7e90fa66d&w=1480"></Img>
+                              </div>
                               )}
                             </>
                           )}
