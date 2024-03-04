@@ -92,6 +92,10 @@ const Img = styled.img`
   width: 100%;
 `;
 
+const ImgDos = styled.img`
+  width: 60%;
+`;
+
 export default function CartPage() {
   const {cartProducts,addProduct,removeProduct,clearCart} = useContext(CartContext);
   const {data:session} = useSession();
@@ -185,7 +189,9 @@ export default function CartPage() {
             <Box>
               <h2>Cart</h2>
               {!cartProducts?.length && (
-                <div>Tu carrito está vacío</div>
+                <div> <p>Tu carrito está vacío <br /> Ingresa productos al carrito para poder hacer una compra</p>
+                <ImgDos src="https://img.freepik.com/free-vector/supermarket-shopping-cart-concept-illustration_114360-22408.jpg?t=st=1709575976~exp=1709579576~hmac=d649ea9aa0296386845f329d52fa5b61447c33870eb64390709a5456d1744f4b&w=1480"></ImgDos>
+                </div>
               )}
               {products?.length > 0 && (
                 <Table>
@@ -236,7 +242,19 @@ export default function CartPage() {
               )}
             </Box>
           </RevealWrapper>
-          {session && !!cartProducts?.length ?       
+          {!session && (
+            <RevealWrapper>
+            
+              <Box>
+                <h3>Debe iniciar sesión para poder registrar una órden</h3>
+                <GoogleButton onClick={(e) => signIn('google')}>Ingresar con Google</GoogleButton>
+                <FacebookButton onClick={(e) => signIn('facebook')}>Ingresar con Facebook</FacebookButton>
+              </Box>            
+          
+            </RevealWrapper>
+          )}
+
+          {!!cartProducts?.length && session &&(   
             <RevealWrapper delay={100}>
               <Box>
                 <h2>Informació de la órden</h2>
@@ -278,19 +296,7 @@ export default function CartPage() {
                 </Button>
               </Box>
             </RevealWrapper>
-          :
-          
-          <RevealWrapper>
-            
-              <Box>
-                <h3>Debe iniciar sesión para poder registrar una órden</h3>
-                <GoogleButton onClick={(e) => signIn('google')}>Ingresar con Google</GoogleButton>
-                <FacebookButton onClick={(e) => signIn('facebook')}>Ingresar con Facebook</FacebookButton>
-              </Box>            
-            
-          </RevealWrapper>
-    
-          }
+          )}
    
         </ColumnsWrapper>
       </Center>
