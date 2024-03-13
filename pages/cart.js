@@ -89,7 +89,7 @@ const CityHolder = styled.div`
 `;
 
 const Img = styled.img`
-  width: 100%;
+  width: 70%;
 `;
 
 const ImgDos = styled.img`
